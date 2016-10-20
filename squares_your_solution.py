@@ -8,7 +8,7 @@ def largest_square(n):
 
 
 cache = {}
-def min_square_sum( n ):
+def min_square_sum_dyn( n ):
     # Inputs:
     # n: int
 
@@ -29,4 +29,13 @@ def min_square_sum( n ):
             cache[n] = 1 + min(l)
             return cache[n]
 
+
+def min_square_sum(n):
+    queue = [(n, 1)]
+    while queue:
+        current_n, depth = queue.pop(0)
+        lgst_sqrt = int(math.sqrt(current_n)) # int floors
+        if lgst_sqrt ** 2 == current_n:
+            return depth
+        queue.extend([(current_n - i**2, depth+1) for i in range(1, lgst_sqrt+1)])
 
